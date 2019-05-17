@@ -10,8 +10,6 @@
     "build-dev": ".\\node_modules\\.bin\\webpack --mode development"
   },
   "dependencies": {
-    "@humany/widget-chat": "^1.0.6",
-    "@webprovisions/platform": "^1.0.1",
     "babel-regenerator-runtime": "^6.5.0"
   },
   "devDependencies": {
