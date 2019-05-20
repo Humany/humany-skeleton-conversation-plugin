@@ -1,42 +1,54 @@
-
 import { ConversationPlatform } from '@humany/widget-conversation';
 
 const statelessConversationPlugin = async (container, settings) => {
     const platform = await ConversationPlatform.create(container);
 
-    platform.listen((input) => {
-        if (input.responseText === 'test') {
-            input.preventDefault();
+    const agent = platform.createAgent({ name: 'Mr.Agent' });
 
-            platform.loader(() => {
-                return new Promise((resolve) => {
-                    setTimeout(() => {
-                        const agent = platform.createAgent({ name: 'Mr.Agent' });
+    agent.print(
+        'list',
+        {
+            actions: {
+                guideOne: 'First custom guide',
+                guideTwo: 'Second custom guide',
+            }
+        },
+    );
 
-                        agent.print(
-                            'guide',
-                            {
-                                title: 'Guide title',
-                                body: '<p> Hello world! </p>',
-                                actions: {
-                                    actionOne: 'first action',
-                                    actionTwo: 'second action',
-                                }
-                            },
-                        );
-
-                        resolve();
-                    }, 2000);
-                });
-            });
-
+    platform.watchAction((input, next) => {
+        const agent = platform.createAgent({ name: 'Mr.Agent' });
+        if (input.key === 'guideOne') {
+            agent.print(
+                'guide',
+                {
+                    title: 'Correct?',
+                    actions: {
+                        yes: 'Yes',
+                        no: 'No',
+                    }
+                },
+            );
+        } else if (input.key === 'guideTwo') {
+            agent.print(
+                'guide',
+                {
+                    body: '<p>Vestibulum interdum elit velit, ac rutrum velit imperdiet lacinia.</p>',
+                },
+            );
+        } else {
+            next();
         }
     });
 
+    platform.listen((input) => {
+        input.preventDefault();
+        input.responseText = null;
+    });
 };
 
 humany.configure((config) => {
     config.plugin(statelessConversationPlugin);
 });
 
+// TO DISABLE REHYDRATION
 sessionStorage.clear();
