@@ -47,8 +47,6 @@ const statelessConversationPlugin = async (container, settings) => {
 };
 
 humany.configure((config) => {
+    config.rehydration({ enabled: false });
     config.plugin(statelessConversationPlugin);
 });
-
-// TO DISABLE REHYDRATION
-sessionStorage.clear();
