@@ -1,54 +1,40 @@
-import { ConversationPlatform } from '@humany/widget-conversation';
+import {
+  ChatPopupPlugin,
+  EmailFormPlugin,
+  FreeTextPlugin,
+  LinkPlugin,
+  PhonePlugin,
+} from '@humany/widget-adapters';
+import { bootstrap, Humany, loadImplementation } from '@humany/widget-core';
+import { LegacyResourcesPlugin } from '@humany/widget-plugins';
+import { BotWidget } from '@humany/widget-types-bot';
 
-const statelessConversationPlugin = async (container, settings) => {
-    const platform = await ConversationPlatform.create(container);
+import BankIdPlugin from './bank-id-plugin';
+import EInvoicePlugin from './e-invoice-plugin';
 
-    const agent = platform.createAgent({ name: 'Mr.Agent' });
+(async () => {
+  const humany = window.humany = Humany.createFromGlobal(window.humany);
 
-    agent.print(
-        'list',
-        {
-            actions: {
-                guideOne: 'First custom guide',
-                guideTwo: 'Second custom guide',
-            }
-        },
+  // load remote implementation
+  const implementation = await loadImplementation(
+    humany,
+    'https://webprovisions-labs.humany.net/skeleton-conversation',
+  );
+
+  bootstrap(implementation, (config) => {
+    config.types.register(
+      '@humany/bot-widget',
+      BotWidget
     );
 
-    platform.watchAction((input, next) => {
-        const agent = platform.createAgent({ name: 'Mr.Agent' });
-        if (input.key === 'guideOne') {
-            agent.print(
-                'guide',
-                {
-                    title: 'Correct?',
-                    actions: {
-                        yes: 'Yes',
-                        no: 'No',
-                    }
-                },
-            );
-        } else if (input.key === 'guideTwo') {
-            agent.print(
-                'guide',
-                {
-                    body: '<p>Vestibulum interdum elit velit, ac rutrum velit imperdiet lacinia.</p>',
-                },
-            );
-        } else {
-            next();
-        }
-    });
-
-    platform.listen((input) => {
-        input.preventDefault();
-        input.responseText = null;
-    });
-};
-
-humany.configure((config) => {
-    config.plugin(statelessConversationPlugin);
-});
-
-// TO DISABLE REHYDRATION
-sessionStorage.clear();
+    config
+      .plugin(LegacyResourcesPlugin)
+      .plugin(PhonePlugin)
+      .plugin(ChatPopupPlugin)
+      .plugin(EmailFormPlugin)
+      .plugin(FreeTextPlugin)
+      .plugin(LinkPlugin)
+      .plugin(BankIdPlugin)
+      .plugin(EInvoicePlugin);
+  });
+})();

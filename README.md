@@ -7,19 +7,19 @@ For documentation on how to use the platform: [`@humany/widget-conversation`](ht
 1. Ensure NodeJS and Git is installed.
 2. Clone or fork this repository.
 3. From the root folder, execute the following command to install the dependencies:
-```
-npm install / yarn
-```
+    ```
+    yarn
+    ```
 4. From the root folder, execute one of the following commands to generate the bundle.
-```
-npm run build / yarn build
-```
-```
-npm run build-dev / yarn build-dev
-```
+    ```
+    yarn build
+    ```
+    ```
+    yarn build-dev
+    ```
 5. To watch the plugin in action
-```
-npm run start / yarn start
-```
+    ```
+    yarn start
+    ```
 
 This will launch your browser and redirect you to a simple server where you can see your plugin in action.

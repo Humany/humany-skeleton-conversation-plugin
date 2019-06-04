@@ -1,6 +1,7 @@
 const webpack = require('webpack');
 const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 
 module.exports = (function () {
   const config = {};
@@ -18,6 +19,10 @@ module.exports = (function () {
   config.plugins = [
     new HtmlWebpackPlugin({
       template: __dirname + '/public/index.html',
+    }),
+    new MiniCssExtractPlugin({
+      filename: 'humany.css',
+      chunkFilename: 'humany-[name].css',
     }),
     new webpack.optimize.LimitChunkCountPlugin({
       maxChunks: 1,
@@ -41,6 +46,40 @@ module.exports = (function () {
             ],
           },
         },
+      },
+      {
+        test: /\.css$/,
+        use: [
+          MiniCssExtractPlugin.loader,
+          {
+            loader: 'css-loader',
+            options: {
+              modules: true,
+              localIdentName: 'humany-[local]',
+            },
+          },
+        ],
+      },
+      {
+        test: /\.scss$/,
+        use: [
+          MiniCssExtractPlugin.loader,
+          {
+            loader: 'css-loader',
+            options: {
+              modules: true,
+              camelCase: 'dashes',
+              localIdentName: 'humany-[local]',
+            },
+          },
+          {
+            loader: 'sass-loader',
+            options: {
+              sourceMap: true,
+              precision: 8,
+            },
+          },
+        ],
       },
     ],
   };

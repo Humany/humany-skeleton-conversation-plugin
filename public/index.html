@@ -5,7 +5,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <title>Humany - Skeleton Plugin</title>
+  <title>Humany - Local Dev Server</title>
   <!-- favicon -->
   <link rel="icon" href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAMAAAADACAMAAABlApw1AAAC3FBMVEUAA
   AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
@@ -48,26 +48,16 @@
   wg2UH217t+tPYsYnkHtZr1IRdsXGJR83DcKseYrc/IGeRCzo3Ndo/GL+3s8n95JFGxg9uXLZ9PXWPNY/iGzqLv3QXXgHZ8XFmwydBV
   /5kJ69l0bJHL9NWPu+aGoPPX/rzXvOWg/fYe2y+1//vhrLUk3/hlkVQ/V0xY3VG5/i47q7zjo/azH9Vt4LioG1bnjj9M8ZegBWjLf7
   7qvzyFvzrVLOOx7UI9VzxeGKX6wntLHgbRYoUKVLER/8BMaB08J5al90AAAAASUVORK5CYII=">
-  <style>
-    body {
-      font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
-    }
-  </style>
   <script>
-    (function (a, b, c, d, e, f, g) {
-      for (var h, i = /[?&]{1}(humany[^=]*)=([^&#]*)/g; h = i.exec(a.location.search);)c += (-1 < c.indexOf("?") ? "&" : "?") + h[1] + "=" + h[2];
-      f = b.createElement(e), f.async = !0, f.src = c, g = b.getElementsByTagName(e)[0], g.parentNode.insertBefore(f, g), a[d] = a[d] || {
-        _c: [],
-        configure: function () { a[d]._c.push(arguments) }
-      }; var j = d.toLowerCase(); a[j] = a[j] || { _c: [], configure: function () { a[j]._c.push(arguments) } }
-    })
-      (window, document, "//webprovisions-labs.humany.net/skeleton-conversation/embed.js", "Humany", "script");
+    // Required to support eager runtime configuration
+    window.humany = window.humany || { _c: [], configure: function () { window.humany._c.push(arguments) } };
   </script>
 </head>
 
 <body>
   <!-- humany logo -->
-  <svg style="margin:20px;width:180px;height:50px;border:5px solid #2D3A47;padding:10px 20px;border-radius:10px;"
+  <svg
+    style="margin:20px;width:180px;height:50px;border:5px solid #2D3A47;padding:10px 20px;border-radius:10px;display:block;"
     fill="#2D3A47">
     <path style="transform: scale(1.7);" d="M49.5,7.9c-3.6-2-7.4-0.7-8.8,1.2c-1.4-1.5-3.2-2.3-6.1-2.3c-3.8,0-6.8,2.4-7.1,5.2c0,0.5,0,3.7-0.1,5.9
                           c0,1-1.4,2.1-2.8,2.1c-1.5,0-2.7-0.8-2.9-2.2c-0.3-2.4,0.1-5.9-0.1-9.2c0-0.7-0.7-1.7-2.1-1.7C18,6.9,17,8.1,17,8.9
@@ -87,20 +77,175 @@
                           c1.5,0,2.3-1.3,2.3-1.9c0.1-2.3,0-9.1,0-9.2C86.8,11.7,86.7,11,86.3,10.2z M103.7,19.2c-1.3,0-2.3,1-2.3,2.3s1,2.3,2.3,2.3
                           s2.3-1,2.3-2.3S105,19.2,103.7,19.2z"></path>
   </svg>
-  <div>
-    <a href="//webprovisions-labs.humany.net/skeleton-conversation-bot"></a>
-    <h2>Humany Skeleton Conversation plugin</h2>
-    <ol>
-      <li>Open the Bot by clicking the icon in lower right</li>
-    </ol>
-    <div style="padding-top: 50px">
-      Best wishes,
-      <br />The
-      <img style="vertical-align: middle"
-        src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAFMAAAAYCAYAAACGLcGvAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAxJpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuMy1jMDExIDY2LjE0NTY2MSwgMjAxMi8wMi8wNi0xNDo1NjoyNyAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wTU09Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9tbS8iIHhtbG5zOnN0UmVmPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvc1R5cGUvUmVzb3VyY2VSZWYjIiB4bWxuczp4bXA9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC8iIHhtcE1NOkRvY3VtZW50SUQ9InhtcC5kaWQ6Qjc2ODQzN0FERThGMTFFMzlCNUY5OUY0NTU3NTQ5ODMiIHhtcE1NOkluc3RhbmNlSUQ9InhtcC5paWQ6Qjc2ODQzNzlERThGMTFFMzlCNUY5OUY0NTU3NTQ5ODMiIHhtcDpDcmVhdG9yVG9vbD0iSWxsdXN0cmF0b3IiPiA8eG1wTU06RGVyaXZlZEZyb20gc3RSZWY6aW5zdGFuY2VJRD0idXVpZDo1Y2IzODVhYy0zOTgxLTExZGEtYTRkYi0wMDBkOTMzZjdhNDIiIHN0UmVmOmRvY3VtZW50SUQ9InV1aWQ6ZjIzMWFmMjktMmU5NC0xMWRhLTgxZDYtMDAwZDkzM2Y3YTQyIi8+IDwvcmRmOkRlc2NyaXB0aW9uPiA8L3JkZjpSREY+IDwveDp4bXBtZXRhPiA8P3hwYWNrZXQgZW5kPSJyIj8+aihR2AAABKhJREFUeNrsWGmIVmUUvjM2zUxJy2g0MX0ykvVFRraItqOlLSClRdAPK1qgMiEqTH+1EFQ/WmwxiyJrsqGyiVTM9mXKNpIkpZJ2isymwhp1lm+Wnheel05P595vvpnp3z3wcN/9vfd5zznvObeqUGialSTJa8AvwLHAtiSXYUk10MJyI3BPTsnIyBxr6ofklIyMzFz+JzIHc0qGL3tIfSefk4EmoA/4HvjWmXsCUAReAn7N2KMWOAY4EtgX+BHYAnxuxuzJyy/sWwI2AZvLHO7hRPD1O4DvuO6ujDl78T0OAw7gvC+4X7cZNwmYC7zOPk/OBfYHWoFej8xA4CfAcdK+ATgf2M765cBjLL8HnJKy4WlAG7Cf0/cxD+Qg7tko/VuBs0mSlTBuNTAtZc+rgYed9ouAR3m4Kn8B5wDv8F0/AhqoTEVHmeYDT7E8j8T+x8yLDpFBTgK+BA5kfarpO5oap3Ip8EYKkQnJ6KAGNjr9RR5inWmbTEuZlqF9y4E7pO1ORi21KXP2Ad6m1pZIZFS2W53xi025kHUBBTNZAbwgZhZIucIZXy8RQdTw5dL2GbBSXEIDTSWhNoQP6jf9QWuvM/U2ISSY10bga9lrCTCT5Yny8dEqgmb9IO1L+f3rTNuZdA9RTiTpUV7MIvN04DKa9YXSd7Izr9pZZ6Z89LvAFJraXGfPR4DjOe8a6ZtlTKsofTNoJYcC90rfqYYMK7cA04GLgWbgU/n2IA+YtuBbLxA3EiW4gcfTyGynhkR5TnyWR34/F03kQrGy1pQ/AD6U/ttNeY2zXuIc7A1cK8r1dEVRpvM5TuY9I/UnpX4U8Ar9aJRLjL+eL0ryUxo5JecjBpw2S1aXiQKi1Eh9k+NKovwB/CYRRZep9/A5QdZ41XmvdlMeZ7QnSifws8zZLfXxxlr0YGbI2IcqDdq9MVVl5owZwoFYze7P6B8wIZbewCrbKnhHu7/3beslpFpCNxXlG+D50ciAeiSOrJf+vjLza8rEpTXOx6nVNDhzjxjFBOQthkpRwq0+29SfHWk6WWVM25r8hCF8qEYANnEYk6FR0aV0SPtCqU9krFjuEGsr+N6V8h41xjUsHS0y9TfdtaZ8lhObaejSmUGmElpnLiYrIXFYxhgxJA3vD4GosNbeFVjRauc+SHhBxcO9CngiZGPVFRBoy21ORtBNktbLBbXWieeyTLBP/FgsP+ikrQuAP3nxNKYoyqCsXaqAzEDY/U77XXxeyXg63PYvV0tO6p1Ct9zcUdNucnydBu9h/I3Omp0ypldu113OniWJ8RLngAYloFfr65K9PbfSK/VVUt9MK9Bflg1ho0XmhG52XvI+U7Y5723AecBXTnjRQ41sltgvyjJTbpELrYc5dOIE0CErO8P8I9BgfKFDwptGG1scMjeatlbGjlb0PmgVPqK5r6gqFJpibtrnkGJTyYGUcCQ650nMFraT4P4y7mMs/eWOlP6DqUm/p/RPYYC9m2beYVLZOoYu9sKrZ0yb5Uu9vTYwhYwW1SzrxEttZyQzF19mS3KwJv4hGmpAnss/Mkfqd1ea3eTy71+P9p9Ce07m8OVpU15cbvDfAgwAaHgGtKIb4XAAAAAASUVORK5CYII=">
-      dev team
+  <style>
+    /* FONTS */
+    @font-face {
+      font-family: 'Lato';
+      font-style: normal;
+      font-weight: 300;
+      src: local('Lato Light'), local('Lato-Light'), url(https://fonts.gstatic.com/s/lato/v11/EsvMC5un3kjyUhB9ZEPPwg.woff2) format('woff2');
+      unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2212, U+2215;
+    }
+
+    @font-face {
+      font-family: 'Lato';
+      font-style: normal;
+      font-weight: 400;
+      src: local('Lato Regular'), local('Lato-Regular'), url(https://fonts.gstatic.com/s/lato/v11/1YwB1sO8YE1Lyjf12WNiUA.woff2) format('woff2');
+      unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2212, U+2215;
+    }
+
+    @font-face {
+      font-family: 'Lato';
+      font-style: normal;
+      font-weight: 700;
+      src: local('Lato Bold'), local('Lato-Bold'), url(https://fonts.gstatic.com/s/lato/v11/H2DMvhDLycM56KNuAtbJYA.woff2) format('woff2');
+      unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2212, U+2215;
+    }
+
+    .humany-bot-widget {
+      right: 20px !important;
+    }
+
+    #bank-id-mock {
+      display: inline-block;
+      border-radius: 10px;
+      box-shadow: 0px 0px 11px rgba(0, 0, 0, 0.2);
+      width: 400px;
+      height: 635px;
+      position: fixed;
+      bottom: -100%;
+      left: 20px;
+      transition: bottom ease-out 200ms;
+    }
+
+    #bank-id-mock[data-active='true'] {
+      bottom: 20px;
+    }
+
+
+    #bank-id-mock-auth-button-container {
+      width: 100%;
+      position: absolute;
+      top: 350px;
+    }
+
+    #bank-id-mock-auth-button-container button {
+      display: block;
+      font-family: Lato;
+      font-weight: 700;
+      width: 200px;
+      border-radius: 5px;
+      border: none;
+      transition: background-color 200ms ease-out;
+      background-color: #469CBE;
+      cursor: pointer;
+      color: #FFF;
+      outline: none;
+      margin: 0 auto;
+      padding: 20px;
+    }
+
+    #bank-id-mock-auth-button-container button:hover {
+      background-color: #225971;
+    }
+
+    #bank-id-mock[data-loading='false'] #bank-id-mock-auth-loading {
+      display: none;
+    }
+
+    #bank-id-mock[data-loading='true'] #bank-id-mock-auth-loading {
+      display: block;
+      position: absolute;
+      top: 335px;
+      width: 100%;
+    }
+
+    #bank-id-mock[data-loading='true'] #bank-id-mock-auth-button-container {
+      display: none;
+    }
+
+    #bank-id-mock svg {
+      position: absolute;
+      top: -120px;
+    }
+
+    @keyframes ball-scale-ripple {
+      0% {
+        transform: scale(0.1);
+        opacity: 1;
+      }
+
+      70% {
+        transform: scale(1);
+        opacity: 0.7;
+      }
+
+      100% {
+        opacity: 0.0;
+      }
+    }
+
+    .ball-scale-ripple>div {
+      animation-fill-mode: both;
+      height: 80px;
+      width: 80px;
+      margin: 0 auto;
+      border-radius: 100%;
+      border: 2px solid #469CBE;
+      animation: ball-scale-ripple 1s 0s infinite cubic-bezier(.21, .53, .56, .8);
+    }
+  </style>
+  <div id="bank-id-mock" data-active="false" data-loading="false">
+    <svg version="1.1" id="Lager_1" x="0px" y="0px" viewBox="0 0 595.3 841.9" enable-background="new 0 0 595.3 841.9"
+      xml:space="preserve">
+      <g>
+        <path fill="#479CBE" d="M241.9,423.6l13.2-83.2c-5.2,0-14.1,0-14.1,0c-6.6,0-15.1-3.7-17.6-10.5c-0.8-2.3-2.7-10.2,8.2-17.9
+        c3.9-2.7,6.4-5.7,6.9-8c0.5-2.4-0.1-4.5-1.8-6.1c-2.4-2.3-7.1-3.6-13.1-3.6c-10.1,0-17.2,5.8-17.9,10c-0.5,3.1,1.9,5.6,4,7.2
+        c6.3,4.7,7.8,11.5,3.9,17.9c-4,6.6-12.7,10.9-22,11c0,0-9.2,0-14.4,0c-1.2,8.1-20.8,132.3-22.3,142.1h78.1
+        c0.7-4.4,4.3-27.9,9.2-58.9H241.9z" />
+        <path fill="#00A5C3"
+          d="M346.5,267.6H267l-10.6,67.3l13.5,0c7.4,0,14.4-3.4,17.4-8.3c1-1.6,1.4-3,1.4-4.3c0-2.8-1.9-4.9-3.8-6.3
+        c-5.2-3.9-6.3-8-6.3-10.9c0-0.6,0-1.1,0.1-1.6c1.1-7.1,10.7-14.8,23.4-14.8c7.6,0,13.4,1.8,16.9,5.1c3.1,2.9,4.3,7,3.4,11.3
+        c-1.1,5.1-6.2,9.3-9.1,11.4c-7.7,5.4-6.7,10.1-6.2,11.5c1.6,4.2,7.7,6.9,12.4,6.9H340c0,0,0,0,0,0.1c28,0.2,43,13.1,38.3,43.1
+        c-4.4,27.9-25.8,39.9-51.3,40.1l-10.1,64.4h14.9c62.9,0,114.3-40.4,124.4-104.2C468.7,299.2,418.5,267.6,346.5,267.6z" />
+        <path fill="#235971"
+          d="M346.5,267.6H267l-10.6,67.3l13.5,0c7.4,0,14.4-3.4,17.4-8.3c1-1.6,1.4-3,1.4-4.3c0-2.8-1.9-4.9-3.8-6.3
+        c-5.2-3.9-6.3-8-6.3-10.9c0-0.6,0-1.1,0.1-1.6c1.1-7.1,10.7-14.8,23.4-14.8c7.6,0,13.4,1.8,16.9,5.1c3.1,2.9,4.3,7,3.4,11.3
+        c-1.1,5.1-6.2,9.3-9.1,11.4c-7.7,5.4-6.7,10.1-6.2,11.5c1.6,4.2,7.7,6.9,12.4,6.9H340c0,0,0,0,0,0.1c28,0.2,43,13.1,38.3,43.1
+        c-4.4,27.9-25.8,39.9-51.3,40.1l-10.1,64.4h14.9c62.9,0,114.3-40.4,124.4-104.2C468.7,299.2,418.5,267.6,346.5,267.6z" />
+        <g>
+          <path fill="#235971" d="M150.7,511.2h31.9c13.6,0,16.9,6.9,15.9,13.2c-0.8,5.1-4.3,8.9-10.3,11.4c7.6,2.9,10.6,7.4,9.5,14.5
+          c-1.4,8.9-9.1,15.5-19.2,15.5h-36.3L150.7,511.2z M171.8,533.8c6.2,0,9.1-3.3,9.7-7.2c0.6-4.2-1.3-7.1-7.5-7.1h-5.5l-2.2,14.3
+          H171.8z M168.4,557.4c6.4,0,10.1-2.6,11-7.9c0.7-4.6-1.9-7.3-8.1-7.3H165l-2.4,15.3H168.4z" />
+          <path fill="#235971" d="M242.4,566.2c-8.3,0.6-12.3-0.3-14.3-3.9c-4.4,2.7-9.3,4.1-14.5,4.1c-9.4,0-12.7-4.9-11.8-10.3
+          c0.4-2.6,1.9-5.1,4.3-7.2c5.2-4.5,18-5.1,23-8.5c0.4-3.8-1.1-5.2-5.8-5.2c-5.5,0-10.1,1.8-18,7.2l1.9-12.4
+          c6.8-4.9,13.4-7.2,21-7.2c9.7,0,18.3,4,16.7,14.6l-1.9,12c-0.7,4.2-0.5,5.5,4.2,5.6L242.4,566.2z M228,547.4
+          c-4.4,2.8-12.6,2.3-13.5,8.1c-0.4,2.7,1.3,4.7,4,4.7c2.6,0,5.8-1.1,8.4-2.9c-0.2-1-0.1-2,0.2-3.9L228,547.4z" />
+          <path fill="#235971" d="M257.9,523.5h16.6l-0.9,5.5c5.3-4.5,9.3-6.2,14.5-6.2c9.3,0,13.6,5.7,12.1,15l-4.3,27.9h-16.6l3.6-23.1
+          c0.7-4.2-0.6-6.2-3.8-6.2c-2.6,0-5,1.4-7.3,4.5l-3.8,24.7h-16.6L257.9,523.5z" />
+          <path fill="#235971" d="M313.1,511.2h16.6l-4.2,26.8l15.9-14.5h20.5l-20.4,18l16.4,24.2h-20.9l-12.6-19.5h-0.2l-3,19.5h-16.6
+          L313.1,511.2z" />
+        </g>
+        <g>
+          <path fill="#479CBE" d="M371.9,511.2H391l-8.4,54.5h-19.1L371.9,511.2z" />
+          <path fill="#479CBE" d="M400.3,511.2h27.3c21.1,0,27.2,15.3,25.2,28c-1.9,12.4-11.7,26.5-30.2,26.5h-30.8L400.3,511.2z M418,552.7
+          c9.3,0,14.4-4.6,15.9-14.3c1.1-7.2-1.1-14.3-11.4-14.3h-5.1l-4.4,28.6H418z" />
+        </g>
+      </g>
+    </svg>
+    <div id="bank-id-mock-auth-button-container">
+      <button onclick="window.bankIdClient.authenticate()">
+        Authenticate
+      </button>
+    </div>
+    <div id="bank-id-mock-auth-loading">
+      <div class="ball-scale-ripple">
+        <div></div>
+      </div>
     </div>
   </div>
+  <a href="//webprovisions-labs.humany.net/skeleton-conversation-bot"></a>
 </body>
 
 </html>
