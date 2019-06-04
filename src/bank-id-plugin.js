@@ -53,9 +53,10 @@ const BankIdPlugin = async (container) => {
           },
           submit: async () => {
             window.bankIdClient.start();
-            const message = await agent.print('guide', { body: 'Log in...' });
+            platform.user.print('text', 'Log in');
+            const message = await agent.print('text', 'Log in...');
             window.bankIdClient.onAuth((token) => {
-              message.update({ body: 'Logged in successfully!' });
+              message.update('Logged in successfully!');
               session.setItem('bank-id-token', token);
               resolve('success');
             });

@@ -25,23 +25,23 @@ const EInvoicePlugin = async (container) => {
     (input, next) => {
       const { key } = input;
       if (key === 'one') {
-        platform.user.print('guide', { body: 'February 31 2019' });
-        agent.print('guide', { body: '<p>Downloading invoice for February 31 2019...</p>' });
+        platform.user.print('text', 'February 31 2019');
+        agent.print('text', 'Downloading invoice for February 31 2019...');
 
         setTimeout(() => window.alert('Downloading...'), 1000);
       } else if (key === 'two') {
-        platform.user.print('guide', { body: 'March 31 2019' });
-        agent.print('guide', { body: '<p>Downloading invoice for March 31 2019...</p>' });
+        platform.user.print('text', 'March 31 2019');
+        agent.print('text', 'Downloading invoice for March 31 2019...');
 
         setTimeout(() => window.alert('Downloading...'), 1000);
       } else if (key === 'three') {
-        platform.user.print('guide', { body: 'April 31 2019' });
-        agent.print('guide', { body: '<p>Downloading invoice for April 31 2019...</p>' });
+        platform.user.print('text', 'April 31 2019');
+        agent.print('text', 'Downloading invoice for April 31 2019...');
 
         setTimeout(() => window.alert('Downloading...'), 1000);
       } else if (key === 'four') {
-        platform.user.print('guide', { body: 'May 31 2019' });
-        agent.print('guide', { body: '<p>Downloading invoice for May 31 2019...</p>' });
+        platform.user.print('text', 'May 31 2019');
+        agent.print('text', 'Downloading invoice for May 31 2019...');
 
         setTimeout(() => window.alert('Downloading...'), 1000);
       } else {
