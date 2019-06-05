@@ -1,7 +1,7 @@
 import { ConversationPlatform } from '@humany/widget-conversation';
 
-const EInvoicePlugin = async (container) => {
-  const platform = await ConversationPlatform.create(container);
+const InvoicePlugin = async (container) => {
+  const platform = await ConversationPlatform.create(container, { key: 'invoice-plugin' });
   const agent = platform.createAgent({ name: 'Invoice agent', avatar: 'https://humany.blob.core.windows.net/webprovisions-labs/guides/bank%20avatar.png' });
 
   platform.resolveEntityValue(
@@ -60,4 +60,4 @@ const EInvoicePlugin = async (container) => {
   );
 };
 
-export default EInvoicePlugin;
+export default InvoicePlugin;
