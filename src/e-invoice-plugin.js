@@ -2,7 +2,7 @@ import { ConversationPlatform } from '@humany/widget-conversation';
 
 const EInvoicePlugin = async (container) => {
   const platform = await ConversationPlatform.create(container);
-  const agent = platform.createAgent({ name: 'Einvoice agent' });
+  const agent = platform.createAgent({ name: 'Invoice agent', avatar: 'https://humany.blob.core.windows.net/webprovisions-labs/guides/bank%20avatar.png' });
 
   platform.resolveEntityValue(
     'download.einvoice',
@@ -22,31 +22,40 @@ const EInvoicePlugin = async (container) => {
   );
 
   platform.watchAction(
-    (input, next) => {
-      const { key } = input;
-      if (key === 'one') {
-        platform.user.print('text', 'February 31 2019');
-        agent.print('text', 'Downloading invoice for February 31 2019...');
+    'one',
+    () => {
+      platform.user.print('text', 'February 31 2019');
+      agent.print('text', 'Downloading invoice for February 31 2019...');
 
-        setTimeout(() => window.alert('Downloading...'), 1000);
-      } else if (key === 'two') {
-        platform.user.print('text', 'March 31 2019');
-        agent.print('text', 'Downloading invoice for March 31 2019...');
+      setTimeout(() => window.alert('Downloading...'), 1000);
+    },
+  );
 
-        setTimeout(() => window.alert('Downloading...'), 1000);
-      } else if (key === 'three') {
-        platform.user.print('text', 'April 31 2019');
-        agent.print('text', 'Downloading invoice for April 31 2019...');
+  platform.watchAction(
+    'two',
+    () => {
+      platform.user.print('text', 'February 31 2019');
+      agent.print('text', 'Downloading invoice for February 31 2019...');
+    },
+  );
 
-        setTimeout(() => window.alert('Downloading...'), 1000);
-      } else if (key === 'four') {
-        platform.user.print('text', 'May 31 2019');
-        agent.print('text', 'Downloading invoice for May 31 2019...');
+  platform.watchAction(
+    'three',
+    () => {
+      platform.user.print('text', 'March 31 2019');
+      agent.print('text', 'Downloading invoice for March 31 2019...');
 
-        setTimeout(() => window.alert('Downloading...'), 1000);
-      } else {
-        next();
-      }
+      setTimeout(() => window.alert('Downloading...'), 1000);
+    },
+  );
+
+  platform.watchAction(
+    'four',
+    () => {
+      platform.user.print('text', 'April 31 2019');
+      agent.print('text', 'Downloading invoice for April 31 2019...');
+
+      setTimeout(() => window.alert('Downloading...'), 1000);
     },
   );
 };

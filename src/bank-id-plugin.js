@@ -16,7 +16,7 @@ const BankIdPlugin = async (container) => {
       if (token) {
         return resolve('success');
       }
-      const agent = platform.createAgent({ name: 'Banky' });
+      const agent = platform.createAgent({ name: 'Bank ID agent', avatar: 'https://humany.blob.core.windows.net/webprovisions-labs/guides/bank%20id%20avatar.PNG' });
       return agent.print(
         'form',
         {
