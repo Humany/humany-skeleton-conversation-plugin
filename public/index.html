@@ -49,8 +49,14 @@
   /5kJ69l0bJHL9NWPu+aGoPPX/rzXvOWg/fYe2y+1//vhrLUk3/hlkVQ/V0xY3VG5/i47q7zjo/azH9Vt4LioG1bnjj9M8ZegBWjLf7
   7qvzyFvzrVLOOx7UI9VzxeGKX6wntLHgbRYoUKVLER/8BMaB08J5al90AAAAASUVORK5CYII=">
   <script>
-    // Required to support eager runtime configuration
-    window.humany = window.humany || { _c: [], configure: function () { window.humany._c.push(arguments) } };
+    (function (a, b, c, d, e, f, g) {
+      for (var h, i = /[?&]{1}(humany[^=]*)=([^&#]*)/g; h = i.exec(a.location.search);)c += (-1 < c.indexOf("?") ? "&" : "?") + h[1] + "=" + h[2];
+      f = b.createElement(e), f.async = !0, f.src = c, g = b.getElementsByTagName(e)[0], g.parentNode.insertBefore(f, g), a[d] = a[d] || {
+        _c: [],
+        configure: function () { a[d]._c.push(arguments) }
+      }; var j = d.toLowerCase(); a[j] = a[j] || { _c: [], configure: function () { a[j]._c.push(arguments) } }
+    })
+      (window, document, "//ace-labs-alpha.humany.cc/bank-id-conversation-api-demo/embed.js", "Humany", "script");
   </script>
 </head>
 
@@ -105,6 +111,10 @@
 
     .humany-bot-widget {
       right: 20px !important;
+    }
+
+    .humany-bot-widget .humany-gentle-list {
+      display: none;
     }
 
     #bank-id-mock {
@@ -195,6 +205,37 @@
       border: 2px solid #469CBE;
       animation: ball-scale-ripple 1s 0s infinite cubic-bezier(.21, .53, .56, .8);
     }
+
+    #bank-id-logged-in {
+      position: fixed;
+      bottom: -60px;
+      left: 20px;
+      transition: bottom ease-out 100ms;
+    }
+
+    #bank-id-logged-in button {
+      display: block;
+      font-family: Lato;
+      font-weight: 700;
+      width: 200px;
+      border-radius: 5px;
+      border: none;
+      transition: background-color 200ms ease-out;
+      background-color: #469CBE;
+      cursor: pointer;
+      color: #FFF;
+      outline: none;
+      margin: 0 auto;
+      padding: 20px;
+    }
+
+    #bank-id-logged-in button:hover {
+      background-color: #225971;
+    }
+
+    #bank-id-logged-in[data-logged-in='true'] {
+      bottom: 20px;
+    }
   </style>
   <div id="bank-id-mock" data-active="false" data-loading="false">
     <svg version="1.1" id="Lager_1" x="0px" y="0px" viewBox="0 0 595.3 841.9" enable-background="new 0 0 595.3 841.9"
@@ -245,7 +286,11 @@
       </div>
     </div>
   </div>
-  <a href="//webprovisions-labs.humany.net/skeleton-conversation-bot"></a>
+
+  <div id="bank-id-logged-in" data-logged-in="false">
+    <button onclick="window.bankIdClient.logOut()">Log out</button>
+  </div>
+  <a href="//ace-labs-alpha.humany.cc/bank-id-demo-bot"></a>
 </body>
 
 </html>

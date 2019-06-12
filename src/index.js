@@ -1,41 +1,14 @@
-import {
-  ChatPopupPlugin,
-  EmailFormPlugin,
-  FreeTextPlugin,
-  LinkPlugin,
-  PhonePlugin,
-} from '@humany/widget-adapters';
-import { bootstrap, Humany, loadImplementation } from '@humany/widget-core';
-import { LegacyResourcesPlugin, RehydratePlugin } from '@humany/widget-plugins';
-import { BotWidget } from '@humany/widget-types-bot';
-
 import BankIdPlugin from './bank-id-plugin';
 import InvoicePlugin from './invoice-plugin';
 
-(async () => {
-  const humany = window.humany = Humany.createFromGlobal(window.humany);
+// Use Humany configuration API targeting the selected implementation
+humany.configure({ implementation: 'bank-id-conversation-api-demo' }, (config) => {
+  // Register the plugins on the selected widget
+  config({ widget: 'bank-id-demo-bot' })
+    .plugin(BankIdPlugin)
+    .plugin(InvoicePlugin)
+    .rehydration({ enabled: false });
 
-  // load remote implementation
-  const implementation = await loadImplementation(
-    humany,
-    'https://webprovisions-labs.humany.net/skeleton-conversation',
-  );
+});
 
-  bootstrap(implementation, (config) => {
-    config.types.register(
-      '@humany/bot-widget',
-      BotWidget
-    );
-
-    config
-      .plugin(LegacyResourcesPlugin)
-      .plugin(PhonePlugin)
-      .plugin(ChatPopupPlugin)
-      .plugin(EmailFormPlugin)
-      .plugin(FreeTextPlugin)
-      .plugin(LinkPlugin)
-      .plugin(BankIdPlugin)
-      .plugin(InvoicePlugin)
-      .plugin(RehydratePlugin);
-  });
-})();
+sessionStorage.clear();

@@ -53,10 +53,6 @@ module.exports = (function () {
           MiniCssExtractPlugin.loader,
           {
             loader: 'css-loader',
-            options: {
-              modules: true,
-              localIdentName: 'humany-[local]',
-            },
           },
         ],
       },
@@ -66,11 +62,6 @@ module.exports = (function () {
           MiniCssExtractPlugin.loader,
           {
             loader: 'css-loader',
-            options: {
-              modules: true,
-              camelCase: 'dashes',
-              localIdentName: 'humany-[local]',
-            },
           },
           {
             loader: 'sass-loader',
