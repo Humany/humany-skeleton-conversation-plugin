@@ -6,7 +6,7 @@ const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 module.exports = (function () {
   const config = {};
 
-  config.mode = 'development'
+  config.mode = 'development';
 
   config.entry = [__dirname + '/src/polyfills.js', __dirname + '/src/index.js'];
 

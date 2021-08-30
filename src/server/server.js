@@ -15,12 +15,9 @@ openport.find(
       console.log(err);
       return;
     } else {
-      const url = `http://localhost:${port}/`;
+      const url = `https://localhost:${port}/`;
 
-      webpackConfig.entry.unshift(
-        `webpack-dev-server/client?${url}`,
-        'webpack/hot/dev-server',
-      );
+      webpackConfig.entry.unshift(`webpack-dev-server/client?${url}`, 'webpack/hot/dev-server');
       const compiler = webpack(webpackConfig);
       const server = new WebpackDevServer(compiler, serverConfig);
 
@@ -28,5 +25,5 @@ openport.find(
 
       opn(url);
     }
-  },
+  }
 );
